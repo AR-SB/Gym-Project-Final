@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['email'])) {
-  header('Location: http://localhost/gym-project2/login.php');
+  header('Location: http://localhost/gym-project-php/login.php');
   exit;
 }
 
@@ -22,18 +22,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $image = $_FILES['image']['name'];
   $image_tmp = $_FILES['image']['tmp_name'];
-  $image_dir = 'uploads/' . $image;
+  $image_dir = '/uploads' . $image;
 
   move_uploaded_file($image_tmp, $image_dir);
 
-  $stmt = $conn->prepare("INSERT INTO posts (user_id, title, image) VALUES (?, ?, ?)");
+  $stmt = $conn->prepare("INSERT INTO posts (user_id, title,images) VALUES (?, ?, ?)");
   $stmt->bind_param("iss", $user['id'], $thought, $image_dir);
   $stmt->execute();
 
   if ($stmt->affected_rows > 0) {
     echo "<p class='message success'>Post created successfully  :)</p>";
+    if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+      die('File upload failed with error code ' . $_FILES['image']['error']);
+  }
+  
     sleep(3);
-    header('Location: http://localhost/gym-project2/home.php');
+    header('Location: http://localhost/gym-project-php/home.php');
     exit;
   } else {
     echo "<p class='message error'>Failed to create post  :( </p>";

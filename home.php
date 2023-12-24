@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['email'])) {
-  header('Location: http://localhost/gym-project2/login.php');
+  header('Location: http://localhost/gym-project-php/login.php');
   exit;
 }
 
@@ -18,7 +18,7 @@ $name = $user['name'];
 $email = $user['email'];
 $profile_picture = $user['profile_picture'];
 
-$stmt = $conn->prepare("SELECT posts.title, posts.image, users.name AS user_name, users.profile_picture AS user_profile_picture FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.timestamp DESC");
+$stmt = $conn->prepare("SELECT posts.title, posts.images, users.name AS user_name, users.profile_picture AS user_profile_picture FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.timestamp DESC");
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -28,23 +28,15 @@ while ($row = $result->fetch_assoc()) {
 }
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_account'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['supplies'])) {
 
-  $stmt = $conn->prepare("DELETE FROM users WHERE email = ?");
-  $stmt->bind_param("s", $_SESSION['email']);
-  $stmt->execute();
-
-  session_destroy();
-
-  setcookie('login_preferences', '', time() - 3600, '/');
-
-  header('Location: http://localhost/gym-project2/login.php');
+  header('Location: http://localhost/gym-project-php/supplies.php');
   exit;
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['log-out'])) {
   session_destroy();
   setcookie('login_preferences', '', time() - 3600, '/');
-  header('Location: http://localhost/gym-project2/login.php');
+  header('Location: http://localhost/gym-project-php/login.php');
   exit;
 }
 
@@ -91,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['log-out'])) {
 
     <div class="actions">
      <form action="" method="POST">
-     <button type="submit" id="delete"  name="delete_account">Delete Account</button>
+     <button type="submit" id="delete"  name="supplies">Supplies</button>
      <button type="submit" id="log-out" name="log-out">Log Out</button>
      <div id="setting"><a  href="editprofile.php">Edit Profile</a></div>
      </form>
@@ -109,8 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['log-out'])) {
         </div>
         <div class="expression"><h3><?php echo $post['title']; ?></h3></div>
         <div class="content-img">
-          <?php if (!empty($post['image'])) : ?>
-            <img class="images" src="<?php echo $post['image']; ?>">
+          <?php if (!empty($post['images'])) : ?>
+            <img class="images" src="<?php echo $post['images']; ?>">
           <?php endif; ?>
         </div>
       </div>

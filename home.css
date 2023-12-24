@@ -71,6 +71,15 @@ header{
   border-radius: 20px;
   box-shadow: 1px 1px 10px var(--bg-200);
 }
+.supplies-button{
+  color: aliceblue;
+  background-color: var(--primary-100);
+  padding: 9px 25px;
+  border: 1px solid var(--primary-200);
+  border-radius: 20px;
+  box-shadow: 1px 1px 10px var(--bg-200);
+  margin-right: 30px;
+}
 .sidebar{
   position: fixed;
   top: 6.7%;

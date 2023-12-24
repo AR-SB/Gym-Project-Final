@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
   } else {
 
    
-    $target_dir = "uploads/";
+    $target_dir = "/uploads";
     $target_file = $target_dir . basename($_FILES["image"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -79,10 +79,10 @@ if (isset($_POST['submit'])) {
                 die("Error inserting data: " . $stmt->error);
             }
 
-            header('Location: http://localhost/gym-project2/login.php');
+            header('Location: http://localhost/gym-project-php//login.php');
             die;
         } else {
-            echo "Sorry, there was an error uploading your file.";
+            echo "Sorry, there was an error uploading your file." . $_FILES["image"]["error"];
 
 
         }

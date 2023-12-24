@@ -3,43 +3,51 @@ require "connection.php";
 
 session_start();
 
-$error = ""; 
+$error = "";
 
 if (isset($_POST['login'])) {
-  $email = $_POST['email'];
-  $password = $_POST['password'];
-  $sql = "SELECT * FROM users WHERE email = ?";
-  $stmt = $conn->prepare($sql);
-  $stmt->bind_param("s", $email);
-  $stmt->execute();
-  $result = $stmt->get_result();
-  $user = $result->fetch_assoc();
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $sql = "SELECT * FROM users WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
 
-  if ($user) {
-    if (password_verify($password, $user['password'])) {
-      $_SESSION['email'] = $email;
+    if ($user) {
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['email'] = $email;
 
-      if (isset($_POST['remember_me'])) {
-        $cookie_name = "login_preferences";
-        $cookie_value = "email=" . $email;
-        setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // Cookie expires in 30 days
-      }
+            // Check if the user is an admin
+            if ($user['role'] === 'admin') {
+                $_SESSION['admin'] = true;
+                header("Location: http://localhost/gym-project-php/admin.php");
+                die;
+            }
 
-      header("Location: http://localhost/gym-project2/home.php");
-      die;
+            if (isset($_POST['remember_me'])) {
+                $cookie_name = "login_preferences";
+                $cookie_value = "email=" . $email;
+                setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // Cookie expires in 30 days
+            }
+
+            header("Location: http://localhost/gym-project-php/home.php");
+            die;
+        } else {
+            $error = "Invalid password.";
+        }
     } else {
-      $error = "Invalid password.";
+        $error = "Invalid email.";
     }
-  } else {
-    $error = "Invalid email.";
-  }
 }
 
 if (isset($_COOKIE['login_preferences'])) {
-  header("Location: http://localhost/gym-project2/home.php");
-  die;
+    header("Location: http://localhost/gym-project-php/home.php");
+    die;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html>

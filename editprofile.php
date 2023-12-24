@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['email'])) {
-  header('Location:  http://localhost/gym-project2/login.php');
+  header('Location:  http://localhost/gym-project-php/login.php');
   exit;
 }
 
@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
   $tel_number = $_POST['tel_number'];
 
   if (!empty($_FILES['image']['name'])) {
-    $target_dir = "uploads/";
+    $target_dir = "/uploads";
     $target_file = $target_dir . basename($_FILES["image"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -74,7 +74,7 @@ if (isset($_POST['submit'])) {
         }
 
     
-        header('Location: http://localhost/gym-project2/editprofile.php');
+        header('Location: http://localhost/gym-project-php/editprofile.php');
         die;
       } else {
         echo "Sorry, there was an error uploading your file.";
@@ -90,7 +90,7 @@ if ($stmt->error) {
 }
 
 
-header('Location: http://localhost/gym-project2/editprofile.php');
+header('Location: http://localhost/gym-project-php/editprofile.php');
 die;
   }
 }

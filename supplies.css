@@ -1,0 +1,254 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    scrollbar-width:thin;
+    scrollbar-color: #6D6E74 black;
+    scroll-behavior: smooth;
+    scroll-snap-type: mandatory;
+
+  }
+  body{
+    height: 100vh;
+    width: 100%;
+    user-select: none;
+    background-color: black;
+  }
+  
+  #background{
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+   color: black;
+    background-position: center;
+    background-size: cover;
+  }
+  .header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding:13px;
+    display: flex;
+    border-radius: 3px;
+    text-overflow: hidden;
+    align-items: center;
+    z-index: 100;
+  }
+  .navbar a{
+    position: relative;
+    font-size: 16px;
+    color: white;
+    margin-right: 30px;
+    text-decoration: none;
+  }
+  .navbar a:hover{
+    color: gold;
+    transition: 0.5 ease;
+  }
+  .navbar a::after{
+    content:"" ;
+    position:absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: gold;
+    bottom: -5px;
+    border-radius: 5px;
+    transform: translateY(10px);
+    opacity: 0;
+    transition: 0.5s ease;
+  }
+  .navbar a:hover:after{
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+
+  .search-bar{
+    width: 250px;
+    height: 35px;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+  }
+  .search-bar input{
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 16px;
+    padding-left: 10px;
+  }
+  .search-bar button{
+    width: 40px;
+    height: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  .search-bar input::placeholder{
+    color: white;
+  }
+  .search-bar button ion-icon{
+    font-size: 22px;
+  }
+  .sidebar{
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      backdrop-filter: blur(3px);
+      color: transparent;
+      background:linear-gradient(to bottom,#c7c7c7,#7c7c7c,#101010 );
+      opacity: 0.95;
+      z-index: 1;
+  }
+  .side-content{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    margin-top: 30%;
+    width: 250px;
+    height: 100%;
+    color: white;
+  }
+  
+  .sidebar a{
+    text-decoration: none;
+    width: 100%;
+    padding: 10px 80px;
+    color: rgb(131, 131, 52);
+    padding: 0;
+    transition: .4s ease;
+    border-radius: 8px;
+    font: bold 18px Arial;
+  }
+  .sidebar a:hover{
+     opacity: 0.8;
+  }
+  
+  .protien-container,
+  .cereatine-container,
+  .equipment-container{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 11%;
+    display: grid;
+    grid-template-rows: repeat(2,1fr);
+    scroll-behavior: smooth;
+    background-color: transparent;
+  }
+  .cereatine-container,
+  .equipment-container{
+    display: none;
+  }
+  .line1,
+  .line2,
+  .line3{
+    height: 100%;
+    padding:0 2%;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+  }
+   .card{
+    background:linear-gradient(to bottom,#c7c7c7,#7c7c7c, #101010);
+    height: 80%;
+    width: 100%;
+    margin-top: 12%;
+    border: 1px outset gold ;
+    border-radius: 30px;
+    display: grid;
+    grid-template-rows: 30px 250px 1fr;
+    gap: 5px;
+    transition: 0.5s ease-in;
+    box-shadow: 0px 1px 12px 5px #101010;
+    -webkit-box-shadow: 0px 1px 12px 5px #101010;
+    -moz-box-shadow: 0px 1px 12px 5px #101010;
+  }
+  .title h2{
+    text-align: center;
+    font-size: 30px;
+    transition: all .4s ease-in;
+  }
+  .title h2:hover{
+    opacity: 0.7;
+  }
+  .card .card-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+  }
+  .card .card-img img{
+    height:100%;
+    width: 80%; 
+    border-radius: 8px; 
+    box-shadow: 1px 2px 4px #285579; 
+  } 
+  
+  .card .price{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px outset gold;
+  }
+  .card .price h2{
+    width: 100%;
+    font-size: 24px;
+   background: linear-gradient(to right ,#101010,#c7c7c7 ,#101010);
+   text-align: center;
+   border: none;
+   outline: none;
+  }
+  .content{
+   display: grid;
+   grid-template-rows: 30px 1fr 1fr ;
+   gap: 20px;
+  }
+  .description{
+    height: 150px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 1.6;
+    color: white;
+  }
+  .actions{
+    height: 20px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    gap: 150px;
+    margin-top: 7%;
+    padding: 0;
+    transition: .7s ease;
+  }
+  .actions a{
+    height: 100%;
+    width: 83%;
+    color: white;
+    margin-left: 10%;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  
+  }
+  .actions a:hover{
+    border-bottom: 1px solid white;
+  }
+  .actions ion-icon{
+    text-decoration: none;
+    height: 100%;
+    color: white;
+  }

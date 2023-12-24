@@ -29,7 +29,7 @@
 
       
       if (!isset($_SESSION['email'])) {
-        header('Location: http://localhost/gym-project2/login.php');
+        header('Location: http://localhost/gym-project-php/login.php');
         exit;
       }
 
